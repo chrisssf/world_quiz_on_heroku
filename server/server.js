@@ -36,6 +36,14 @@ MongoClient.connect('mongodb+srv://Chrisssf:Chrimssf@freecluster.zfuvg.mongodb.n
   app.use( '/api/countries', createRouter( countriesCollection ));
   app.use( '/api/capitals', createRouter( capitalsCollection ));
   app.use( '/api/flags', createRouter( flagsCollection ));
+
+  if (process.env.NODE_ENV === "production") {
+    // Static folder
+    app.use(express.static(__dirname + '/public'))
+  
+    // handle Single Page Aplication
+    app.get(/.*/, (req, res) => res.sendFile(__dirname + '/public/index.html'))
+  }
 })
 .catch( console.error );
 
@@ -44,15 +52,16 @@ MongoClient.connect('mongodb+srv://Chrisssf:Chrimssf@freecluster.zfuvg.mongodb.n
 
 
 
+
 // Handle Production
-if (process.env.NODE_ENV === "production") {
-  // Static folder
-  app.use(express.static(__dirname + '/public'))
+// if (process.env.NODE_ENV === "production") {
+//   // Static folder
+//   app.use(express.static(__dirname + '/public'))
 
-  // handle Single Page Aplication
-  app.get(/.*/, (req, res) => res.sendFile(__dirname + '/public/index.html'))
+//   // handle Single Page Aplication
+//   app.get(/.*/, (req, res) => res.sendFile(__dirname + '/public/index.html'))
 
-}
+// }
 
 
 
@@ -60,6 +69,8 @@ if (process.env.NODE_ENV === "production") {
 // app.listen( 3000, function() {
 //   console.log( `World Quiz server running on port ${this.address().port}` );
 // });  
+
+
 
 // New code for heroku. Uses port assigned by heroku OR if not on heroku, use originall port!!!!!!
 const port = process.env.PORT || 3000
