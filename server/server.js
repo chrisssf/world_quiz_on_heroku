@@ -26,7 +26,7 @@ const createRouter = require('./helpers/create_router.js');
 // .catch( console.error );
 
 // new code!!!!!!!!!!
-MongoClient.connect('mongodb+srv://Chrisssf:Chrimssf@freecluster.zfuvg.mongodb.net/world_quiz?retryWrites=true&w=majority')
+MongoClient.connect('mongodb+srv://Chrisssf:Chrimssf@freecluster.zfuvg.mongodb.net/world_quiz?retryWrites=true&w=majority' , {useUnifiedTopology: true})
   .then((client) => {
     const db = client.db('world_quiz');
     const countriesCollection = db.collection('countries');
