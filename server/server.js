@@ -53,7 +53,7 @@ if (process.env.NODE_ENV === "production") {
   app.get(/.*/, (req, res) => res.sendFile(__dirname + '/public/index.html'))
 
   console.log("in production")
-  System.err.println("in production 2222222");
+  System.out.println("in production 2222222");
 }
 
 
@@ -66,7 +66,7 @@ if (process.env.NODE_ENV === "production") {
 // New code for heroku. Uses port assigned by heroku OR if not on heroku, use originall port!!!!!!
 const port = process.env.PORT || 3000
 console.log("port", port)
-System.err.println("port2 ======== " + port);
+System.out.println("port2 ======== " + port);
 app.listen(port, function(){
   console.log(`Server started running on port ${port}`)
 })
