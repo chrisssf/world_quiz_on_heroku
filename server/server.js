@@ -12,23 +12,9 @@ const createRouter = require('./helpers/create_router.js');
 
 
 // original code for connecting to local DB!!!!!!!
-// MongoClient.connect('mongodb://localhost:27017')
-//   .then((client) => {
-//     const db = client.db('quiz_questions');
-//     const countriesCollection = db.collection('countries');
-//     const capitalsCollection = db.collection('capitals');
-//     const flagsCollection = db.collection('flags'); 
-
-//   app.use( '/api/countries', createRouter( countriesCollection ));
-//   app.use( '/api/capitals', createRouter( capitalsCollection ));
-//   app.use( '/api/flags', createRouter( flagsCollection ));
-// })
-// .catch( console.error );
-
-// new code!!!!!!!!!!
-MongoClient.connect( process.env.DATABASE_URL , {useUnifiedTopology: true})
+MongoClient.connect('mongodb://localhost:27017')
   .then((client) => {
-    const db = client.db('world_quiz');
+    const db = client.db('quiz_questions');
     const countriesCollection = db.collection('countries');
     const capitalsCollection = db.collection('capitals');
     const flagsCollection = db.collection('flags'); 
@@ -36,16 +22,31 @@ MongoClient.connect( process.env.DATABASE_URL , {useUnifiedTopology: true})
   app.use( '/api/countries', createRouter( countriesCollection ));
   app.use( '/api/capitals', createRouter( capitalsCollection ));
   app.use( '/api/flags', createRouter( flagsCollection ));
-
-  if (process.env.NODE_ENV === "production") {
-    // Static folder
-    app.use(express.static(__dirname + '/public'))
-  
-    // handle Single Page Aplication
-    app.get(/.*/, (req, res) => res.sendFile(__dirname + '/public/index.html'))
-  }
 })
 .catch( console.error );
+
+// new code!!!!!!!!!!
+// MongoClient.connect( "mongodb+srv://Chrisssf:Chrimssf@freecluster.zfuvg.mongodb.net/world_quiz?retryWrites=true&w=majority", {useUnifiedTopology: true})
+//   .then((client) => {
+//     const db = client.db('world_quiz');
+//     const countriesCollection = db.collection('countries');
+//     const capitalsCollection = db.collection('capitals');
+//     const flagsCollection = db.collection('flags'); 
+
+//   app.use( '/api/countries', createRouter( countriesCollection ));
+//   app.use( '/api/capitals', createRouter( capitalsCollection ));
+//   app.use( '/api/flags', createRouter( flagsCollection ));
+
+//   if (process.env.NODE_ENV === "production") {
+//     // Static folder
+//     app.use(express.static(__dirname + '/public'))
+  
+//     // handle Single Page Aplication
+//     app.get(/.*/, (req, res) => res.sendFile(__dirname + '/public/index.html'))
+//   }
+// })
+// .catch( console.error );
+
 
 // may need this line to remove warning, see 15:33 in video 1.....
 // useNewUrlParser: true 
